@@ -11,14 +11,15 @@
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_password"
+        android:id="@+id/input_layout_fuel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatEditText
+            android:minEms="10"
             android:inputType="numberDecimal"
-            android:hint="Liters of Fuel"
-            android:id="@+id/fuel"
+            android:hint="Fuel filled (litres)"
+            android:id="@+id/edittext_fuel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

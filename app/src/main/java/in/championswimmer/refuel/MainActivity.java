@@ -1,6 +1,7 @@
 package in.championswimmer.refuel;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 //Set up the dialog using an AlertDialogBuilder
                 AlertDialog.Builder adBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_AlertDialog);
                 adBuilder.setView(dialogView);
+
+                adBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Handle submit
+                    }
+                });
 
                 AlertDialog refuelDialog = adBuilder.create();
                 refuelDialog.show();

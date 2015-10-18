@@ -1,4 +1,5 @@
-<resources xmlns:app="http://schemas.android.com/apk/res-auto">
+<resources
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -17,7 +18,16 @@
     <style name="AppTheme.TextApperanceTitle" parent="TextAppearance.AppCompat.Headline">
     </style>
     <style name="AppTheme.TextApperanceSubtitle" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="AppTheme.RefuelEntryDialogEditText">
+        <item name="android:textSize">26dp</item>
+    </style>
+
+    <style name="AppTheme.RefuelEntryDialogEditTextHint">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert"/>

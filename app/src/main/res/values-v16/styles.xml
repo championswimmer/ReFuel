@@ -12,7 +12,7 @@
     </style>
 
     <style name="AppTheme.TextApperanceSubtitle" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">20dp</item>
         <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:textStyle">italic</item>
 

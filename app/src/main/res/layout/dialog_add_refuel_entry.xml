@@ -12,12 +12,13 @@
 
 
     <android.support.design.widget.TextInputLayout
+        app:hintTextAppearance="@style/AppTheme.RefuelEntryDialogEditTextHint"
         android:id="@+id/input_layout_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatEditText
-            android:textSize="30dp"
+            app:theme="@style/AppTheme.RefuelEntryDialogEditText"
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:minEms="10"
@@ -53,12 +54,13 @@
     </LinearLayout>
 
     <android.support.design.widget.TextInputLayout
+        app:hintTextAppearance="@style/AppTheme.RefuelEntryDialogEditTextHint"
         android:id="@+id/input_layout_fuel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatEditText
-            android:textSize="26dp"
+            app:theme="@style/AppTheme.RefuelEntryDialogEditText"
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:minEms="10"
@@ -71,12 +73,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        app:hintTextAppearance="@style/AppTheme.RefuelEntryDialogEditTextHint"
         android:id="@+id/input_layout_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatEditText
-            android:textSize="30dp"
+            app:theme="@style/AppTheme.RefuelEntryDialogEditText"
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:minEms="10"
@@ -90,12 +93,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        app:hintTextAppearance="@style/AppTheme.RefuelEntryDialogEditTextHint"
         android:id="@+id/input_layout_odometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatEditText
-            android:textSize="30dp"
+            app:theme="@style/AppTheme.RefuelEntryDialogEditText"
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:minEms="10"

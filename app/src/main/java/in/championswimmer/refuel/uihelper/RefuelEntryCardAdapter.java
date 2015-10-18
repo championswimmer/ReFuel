@@ -1,5 +1,6 @@
 package in.championswimmer.refuel.uihelper;
 
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -51,11 +52,11 @@ public class RefuelEntryCardAdapter extends RecyclerView.Adapter<RefuelEntryCard
 
     public class RefuelEntryViewHolder extends RecyclerView.ViewHolder {
 
-        TextView fuelFilled;
+        AppCompatTextView fuelFilled;
 
         public RefuelEntryViewHolder(View itemView) {
             super(itemView);
-            fuelFilled = (TextView) itemView.findViewById(R.id.tv_fuel_filled);
+            fuelFilled = (AppCompatTextView) itemView.findViewById(R.id.tv_fuel_filled);
         }
 
 

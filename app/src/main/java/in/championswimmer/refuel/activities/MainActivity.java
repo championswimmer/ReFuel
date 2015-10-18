@@ -9,6 +9,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +21,11 @@ import android.widget.Switch;
 import in.championswimmer.refuel.R;
 import in.championswimmer.refuel.dbhelper.RefuelDbHelper;
 import in.championswimmer.refuel.uihelper.ExtendedFuelEntryWatchers;
+import in.championswimmer.refuel.uihelper.RefuelEntryCardAdapter;
 
 public class MainActivity extends AppCompatActivity {
+
+    RecyclerView rvHistoryContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +33,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        rvHistoryContainer = (RecyclerView) findViewById(R.id.refuel_history_container);
+        rvHistoryContainer.setLayoutManager(new LinearLayoutManager(this));
+        RefuelEntryCardAdapter rfEntryCardAdapter = new RefuelEntryCardAdapter(RefuelDbHelper.getRefuelHistory(getApplicationContext()));
+        rvHistoryContainer.setAdapter(rfEntryCardAdapter);
+
         setSupportActionBar(toolbar);
-        try {
-//            getSupportActionBar().setTitle(null);
-//            getSupportActionBar().setCustomView(R.layout.titlebar_main_collapsible);
-//            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        } catch (NullPointerException e) {
-            //Do something with the exception
-        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

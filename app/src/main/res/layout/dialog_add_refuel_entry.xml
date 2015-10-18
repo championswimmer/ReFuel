@@ -40,9 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Switch
+            android:showText="false"
             android:id="@+id/switch_enter_rate"
-            android:textOff="Enter Fuel"
-            android:textOn="Enter Rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -101,7 +100,6 @@
             android:textAlignment="center"
             android:minEms="10"
             android:inputType="number"
-            android:enabled="false"
             android:hint="Odometer (Km)"
             android:id="@+id/edittext_odometer"
             android:layout_width="wrap_content"

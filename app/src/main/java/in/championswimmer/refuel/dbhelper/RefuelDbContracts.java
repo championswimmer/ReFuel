@@ -28,6 +28,7 @@ public interface RefuelDbContracts {
                         COL_FUEL_FILLED + TEXT_TYPE + COMMA_SEP +
                         COL_MONEY_PAID + TEXT_TYPE + COMMA_SEP +
                         COL_RATE_PER_LIT + TEXT_TYPE + COMMA_SEP +
+                        COL_ODOMETER_READING + TEXT_TYPE + COMMA_SEP +
                         COL_DID_FULL_TANK + INTEGER_TYPE +
                 " )";
 

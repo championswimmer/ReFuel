@@ -2,9 +2,14 @@ package in.championswimmer.refuel.dbhelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+
+import in.championswimmer.refuel.pojos.RefuelEntry;
 
 /**
  * Created by championswimmer on 18/10/15.
@@ -48,5 +53,39 @@ public class RefuelDbHelper extends SQLiteOpenHelper{
 
         db.insert(RefuelDbContracts.RefuelEntry.TABLE_NAME, null, cv);
         return true;
+    }
+
+    public static ArrayList<RefuelEntry> getRefuelHistory(Context ctx) {
+        SQLiteDatabase db = getInstance(ctx).getReadableDatabase();
+        String[] projection = {
+                RefuelDbContracts.RefuelEntry._ID,
+                RefuelDbContracts.RefuelEntry.COL_FUEL_FILLED,
+                RefuelDbContracts.RefuelEntry.COL_MONEY_PAID,
+                RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT,
+                RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING,
+//                RefuelDbContracts.RefuelEntry.COL_DID_FULL_TANK,
+        };
+        Cursor c = db.query(
+                RefuelDbContracts.RefuelEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        ArrayList<RefuelEntry> refuelEntries = new ArrayList<>(c.getCount());
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            refuelEntries.add(c.getPosition(), new RefuelEntry(
+                    c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_FUEL_FILLED)),
+                    c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT)),
+                    c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_MONEY_PAID)),
+                    c.getInt(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING))
+            ));
+            c.moveToNext();
+        }
+
+        return refuelEntries;
     }
 }

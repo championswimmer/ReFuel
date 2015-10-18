@@ -17,6 +17,7 @@
     <style name="AppTheme.TextApperanceTitle" parent="TextAppearance.AppCompat.Headline">
     </style>
     <style name="AppTheme.TextApperanceSubtitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textSize">16dp</item>
     </style>
 
     <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert"/>

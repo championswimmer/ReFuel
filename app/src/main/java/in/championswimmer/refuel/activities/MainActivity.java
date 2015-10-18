@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         rvHistoryContainer = (RecyclerView) findViewById(R.id.refuel_history_container);
         rvHistoryContainer.setLayoutManager(new LinearLayoutManager(this));
-        RefuelEntryCardAdapter rfEntryCardAdapter = new RefuelEntryCardAdapter(RefuelDbHelper.getRefuelHistory(getApplicationContext()));
+        final RefuelEntryCardAdapter rfEntryCardAdapter = new RefuelEntryCardAdapter(RefuelDbHelper.getRefuelHistory(getApplicationContext()));
         rvHistoryContainer.setAdapter(rfEntryCardAdapter);
 
         setSupportActionBar(toolbar);
@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                                 Float.valueOf(etMoneyAmt.getText().toString()),
                                 Integer.valueOf(etOdometer.getText().toString())
                                 );
+
+                        rfEntryCardAdapter.updateRefuelHistory(RefuelDbHelper.getRefuelHistory(getApplicationContext()));
+
                     }
                 });
 

@@ -23,6 +23,11 @@ public class RefuelEntryCardAdapter extends RecyclerView.Adapter<RefuelEntryCard
         this.refuelHistoryList = refuelHistoryList;
     }
 
+    public void updateRefuelHistory(ArrayList<RefuelEntry> refuelHistoryList) {
+        this.refuelHistoryList = refuelHistoryList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public RefuelEntryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_refuel_entry, parent, false);

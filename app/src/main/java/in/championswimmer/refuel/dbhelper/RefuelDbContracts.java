@@ -21,6 +21,7 @@ public interface RefuelDbContracts {
         String COL_RATE_PER_LIT = "rate_per_lit";
         String COL_ODOMETER_READING = "odometer_reading";
         String COL_DID_FULL_TANK = "did_full_tank";
+        //TODO: Add columns for timestamp and name of station
 
         String COMMAND_CREATE_ENTRIES =
                 "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +

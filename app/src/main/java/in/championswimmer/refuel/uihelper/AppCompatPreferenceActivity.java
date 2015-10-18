@@ -1,4 +1,4 @@
-package in.championswimmer.refuel;
+package in.championswimmer.refuel.uihelper;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

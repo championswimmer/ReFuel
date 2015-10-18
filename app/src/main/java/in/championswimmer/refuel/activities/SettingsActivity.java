@@ -1,4 +1,4 @@
-package in.championswimmer.refuel;
+package in.championswimmer.refuel.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import in.championswimmer.refuel.uihelper.AppCompatPreferenceActivity;
+import in.championswimmer.refuel.R;
 
 /**
  * Created by championswimmer on 18/10/15.

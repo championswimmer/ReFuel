@@ -7,8 +7,13 @@
         android:entries="@array/distance_unit_names"
         android:entryValues="@array/distance_unit_values"
         android:key="distance_unit"
-        android:title="Distance Unit">
+        android:title="Distance Unit"/>
 
-    </ListPreference>
-
+    <ListPreference
+        android:summary="%s"
+        android:defaultValue="litre"
+        android:entries="@array/fuel_unit_names"
+        android:entryValues="@array/fuel_unit_values"
+        android:key="fuel_unit"
+        android:title="Fuel Unit"/>
 </PreferenceScreen>

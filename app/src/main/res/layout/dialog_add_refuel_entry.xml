@@ -3,23 +3,107 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
     android:padding="40dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_fuel"
-        android:layout_width="match_parent"
+        android:id="@+id/input_layout_money"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatEditText
+            android:textSize="30dp"
+            android:fontFamily="sans-serif-light"
+            android:textAlignment="center"
+            android:minEms="10"
+            android:inputType="numberDecimal"
+            android:hint="Total amount (\u20b9)"
+            android:id="@+id/edittext_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Enter Fuel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Switch
+            android:id="@+id/switch_enter_rate"
+            android:textOff="Enter Fuel"
+            android:textOn="Enter Rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Enter Rate"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:textSize="26dp"
+            android:fontFamily="sans-serif-light"
+            android:textAlignment="center"
             android:minEms="10"
             android:inputType="numberDecimal"
             android:hint="Fuel filled (litres)"
             android:id="@+id/edittext_fuel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:textSize="30dp"
+            android:fontFamily="sans-serif-light"
+            android:textAlignment="center"
+            android:minEms="10"
+            android:inputType="numberDecimal"
+            android:enabled="false"
+            android:hint="Rate per Litre (\u20b9)"
+            android:id="@+id/edittext_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_odometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:textSize="30dp"
+            android:fontFamily="sans-serif-light"
+            android:textAlignment="center"
+            android:minEms="10"
+            android:inputType="number"
+            android:enabled="false"
+            android:hint="Odometer (Km)"
+            android:id="@+id/edittext_odometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

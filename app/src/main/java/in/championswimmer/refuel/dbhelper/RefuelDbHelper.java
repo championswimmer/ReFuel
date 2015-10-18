@@ -38,12 +38,13 @@ public class RefuelDbHelper extends SQLiteOpenHelper{
 
     }
 
-    public static boolean addNewRefuelEntry(Context ctx, float fuelAmt, float rate, float moneyAmt) {
+    public static boolean addNewRefuelEntry(Context ctx, float fuelAmt, float rate, float moneyAmt, int odometer) {
         SQLiteDatabase db = getInstance(ctx).getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(RefuelDbContracts.RefuelEntry.COL_FUEL_FILLED, String.valueOf(fuelAmt));
         cv.put(RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT, String.valueOf(rate));
         cv.put(RefuelDbContracts.RefuelEntry.COL_MONEY_PAID, String.valueOf(moneyAmt));
+        cv.put(RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING, String.valueOf(odometer));
 
         db.insert(RefuelDbContracts.RefuelEntry.TABLE_NAME, null, cv);
         return true;

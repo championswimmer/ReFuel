@@ -2,18 +2,23 @@ package in.championswimmer.refuel.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Switch;
 
 import in.championswimmer.refuel.R;
+import in.championswimmer.refuel.dbhelper.RefuelDbHelper;
+import in.championswimmer.refuel.uihelper.ExtendedFuelEntryWatchers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,14 +46,39 @@ public class MainActivity extends AppCompatActivity {
                 LayoutInflater li = LayoutInflater.from(getBaseContext());
                 View dialogView = li.inflate(R.layout.dialog_add_refuel_entry, null);
 
+                final AppCompatEditText etFuelAmt = (AppCompatEditText) dialogView.findViewById(R.id.edittext_fuel);
+                final AppCompatEditText etRate = (AppCompatEditText) dialogView.findViewById(R.id.edittext_rate);
+                final AppCompatEditText etMoneyAmt = (AppCompatEditText) dialogView.findViewById(R.id.edittext_money);
+                final AppCompatEditText etOdometer = (AppCompatEditText) dialogView.findViewById(R.id.edittext_odometer);
+                Switch swEnterRate = (Switch) dialogView.findViewById(R.id.switch_enter_rate);
+
+                etFuelAmt.addTextChangedListener(new ExtendedFuelEntryWatchers.FuelTextWatcher(etRate, etMoneyAmt));
+                etRate.addTextChangedListener(new ExtendedFuelEntryWatchers.RateTextWatcher(etFuelAmt, etMoneyAmt));
+                etMoneyAmt.addTextChangedListener(new ExtendedFuelEntryWatchers.MoneyTextWatcher(etFuelAmt, etRate));
+                swEnterRate.setOnCheckedChangeListener(new ExtendedFuelEntryWatchers.RateEnterCheckedChanceListener(etRate, etFuelAmt));
+
                 //Set up the dialog using an AlertDialogBuilder
                 AlertDialog.Builder adBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_AlertDialog);
                 adBuilder.setView(dialogView);
 
+
+                adBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
                 adBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Handle submit
+                        RefuelDbHelper.addNewRefuelEntry(
+                                getApplicationContext(),
+                                Float.valueOf(etFuelAmt.getText().toString()),
+                                Float.valueOf(etRate.getText().toString()),
+                                Float.valueOf(etMoneyAmt.getText().toString()),
+                                Integer.valueOf(etOdometer.getText().toString())
+                                );
                     }
                 });
 

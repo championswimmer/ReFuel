@@ -23,14 +23,18 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary">
 
+            <!-- Can put text view here for catchy prase -->
+            <include layout="@layout/titlebar_main_collapsible"/>
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_width="match_parent"
                 app:layout_collapseMode="pin"
-                android:titleTextAppearance="@style/AppTheme.TextApperanceTitle"
+                android:gravity="left"
                 app:logo="@drawable/ic_gas_station_white_small"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
+
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 final AppCompatEditText etRate = (AppCompatEditText) dialogView.findViewById(R.id.edittext_rate);
                 final AppCompatEditText etMoneyAmt = (AppCompatEditText) dialogView.findViewById(R.id.edittext_money);
                 final AppCompatEditText etOdometer = (AppCompatEditText) dialogView.findViewById(R.id.edittext_odometer);
-                Switch swEnterRate = (Switch) dialogView.findViewById(R.id.switch_enter_rate);
+                SwitchCompat swEnterRate = (SwitchCompat) dialogView.findViewById(R.id.switch_enter_rate);
 
                 etFuelAmt.addTextChangedListener(new ExtendedFuelEntryWatchers.FuelTextWatcher(etRate, etMoneyAmt));
                 etRate.addTextChangedListener(new ExtendedFuelEntryWatchers.RateTextWatcher(etFuelAmt, etMoneyAmt));

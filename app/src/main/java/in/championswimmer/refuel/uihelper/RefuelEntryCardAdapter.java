@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import in.championswimmer.refuel.R;
@@ -38,7 +40,16 @@ public class RefuelEntryCardAdapter extends RecyclerView.Adapter<RefuelEntryCard
 
     @Override
     public void onBindViewHolder(RefuelEntryViewHolder holder, int position) {
-        holder.fuelFilled.setText(String.valueOf(refuelHistoryList.get(position).getFuelFilled()));
+        String rateFormatted = new DecimalFormat("####0.00").format(refuelHistoryList.get(position).getRatePerLit());
+        String ratePerLit = "\u20b9" + rateFormatted + "/L";
+        String fuelFilled = String.valueOf(refuelHistoryList.get(position).getFuelFilled()) + " L";
+        String odometerReading = String.valueOf(refuelHistoryList.get(position).getOdometer()) + " Km";
+        String moneyPaid = "\u20b9 " + String.valueOf(refuelHistoryList.get(position).getMoneyPaid());
+
+        holder.fuelFilled.setText(fuelFilled);
+        holder.ratePerLit.setText(ratePerLit);
+        holder.odometerReading.setText(odometerReading);
+        holder.moneyPaid.setText(moneyPaid);
 
     }
 
@@ -53,10 +64,16 @@ public class RefuelEntryCardAdapter extends RecyclerView.Adapter<RefuelEntryCard
     public class RefuelEntryViewHolder extends RecyclerView.ViewHolder {
 
         AppCompatTextView fuelFilled;
+        AppCompatTextView ratePerLit;
+        AppCompatTextView odometerReading;
+        AppCompatTextView moneyPaid;
 
         public RefuelEntryViewHolder(View itemView) {
             super(itemView);
             fuelFilled = (AppCompatTextView) itemView.findViewById(R.id.tv_fuel_filled);
+            ratePerLit = (AppCompatTextView) itemView.findViewById(R.id.tv_rate_per_lit);
+            odometerReading = (AppCompatTextView) itemView.findViewById(R.id.tv_odometer_reading);
+            moneyPaid = (AppCompatTextView) itemView.findViewById(R.id.tv_money_paid);
         }
 
 

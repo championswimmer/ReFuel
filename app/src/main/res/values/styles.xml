@@ -30,6 +30,7 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
+
     <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert"/>
 
 </resources>

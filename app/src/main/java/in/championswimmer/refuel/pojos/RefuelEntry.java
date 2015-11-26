@@ -9,12 +9,14 @@ public class RefuelEntry {
     Float ratePerLit;
     Float moneyPaid;
     Integer odometer;
+    Long timestamp;
 
-    public RefuelEntry(Float fuelFilled, Float ratePerLit, Float moneyPaid, Integer odometer) {
+    public RefuelEntry(Float fuelFilled, Float ratePerLit, Float moneyPaid, Integer odometer, Long timestamp) {
         this.fuelFilled = fuelFilled;
         this.ratePerLit = ratePerLit;
         this.moneyPaid = moneyPaid;
         this.odometer = odometer;
+        this.timestamp = timestamp;
     }
 
     public Float getFuelFilled() {
@@ -47,5 +49,13 @@ public class RefuelEntry {
 
     public void setOdometer(Integer odometer) {
         this.odometer = odometer;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

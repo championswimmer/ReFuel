@@ -50,6 +50,7 @@ public class RefuelDbHelper extends SQLiteOpenHelper{
         cv.put(RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT, String.valueOf(rate));
         cv.put(RefuelDbContracts.RefuelEntry.COL_MONEY_PAID, String.valueOf(moneyAmt));
         cv.put(RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING, String.valueOf(odometer));
+        cv.put(RefuelDbContracts.RefuelEntry.COL_TIMESTAMP, System.currentTimeMillis());
 
         db.insert(RefuelDbContracts.RefuelEntry.TABLE_NAME, null, cv);
         return true;
@@ -63,6 +64,7 @@ public class RefuelDbHelper extends SQLiteOpenHelper{
                 RefuelDbContracts.RefuelEntry.COL_MONEY_PAID,
                 RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT,
                 RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING,
+                RefuelDbContracts.RefuelEntry.COL_TIMESTAMP,
 //                RefuelDbContracts.RefuelEntry.COL_DID_FULL_TANK,
         };
         Cursor c = db.query(
@@ -72,7 +74,7 @@ public class RefuelDbHelper extends SQLiteOpenHelper{
                 null,
                 null,
                 null,
-                null
+                RefuelDbContracts.RefuelEntry.COL_TIMESTAMP + " DESC"
         );
         ArrayList<RefuelEntry> refuelEntries = new ArrayList<>(c.getCount());
         c.moveToFirst();
@@ -81,7 +83,8 @@ public class RefuelDbHelper extends SQLiteOpenHelper{
                     c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_FUEL_FILLED)),
                     c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT)),
                     c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_MONEY_PAID)),
-                    c.getInt(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING))
+                    c.getInt(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING)),
+                    c.getLong(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_TIMESTAMP))
             ));
             c.moveToNext();
         }

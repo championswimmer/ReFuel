@@ -42,7 +42,8 @@ public class RefuelEntryCardAdapter extends RecyclerView.Adapter<RefuelEntryCard
     public void onBindViewHolder(RefuelEntryViewHolder holder, int position) {
         String rateFormatted = new DecimalFormat("####0.00").format(refuelHistoryList.get(position).getRatePerLit());
         String ratePerLit = "\u20b9" + rateFormatted + "/L";
-        String fuelFilled = String.valueOf(refuelHistoryList.get(position).getFuelFilled()) + " L";
+        String fuelFormatted = new DecimalFormat("####0.00").format(refuelHistoryList.get(position).getFuelFilled());
+        String fuelFilled = fuelFormatted + " L";
         String odometerReading = String.valueOf(refuelHistoryList.get(position).getOdometer()) + " Km";
         String moneyPaid = "\u20b9 " + String.valueOf(refuelHistoryList.get(position).getMoneyPaid());
 

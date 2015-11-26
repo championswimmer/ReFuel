@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import in.championswimmer.refuel.R;
 import in.championswimmer.refuel.dbhelper.RefuelDbHelper;
@@ -63,33 +65,37 @@ public class MainActivity extends AppCompatActivity {
 
                 //Set up the dialog using an AlertDialogBuilder
                 AlertDialog.Builder adBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_AlertDialog);
-                adBuilder.setView(dialogView);
+                adBuilder.setView(dialogView)
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Update", null);
 
-
-                adBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                final AlertDialog refuelDialog = adBuilder.create();
+                refuelDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                adBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // Handle submit
-                        RefuelDbHelper.addNewRefuelEntry(
-                                getApplicationContext(),
-                                Float.valueOf(etFuelAmt.getText().toString()),
-                                Float.valueOf(etRate.getText().toString()),
-                                Float.valueOf(etMoneyAmt.getText().toString()),
-                                Integer.valueOf(etOdometer.getText().toString())
+                    public void onShow(DialogInterface dialogInterface) {
+                        Button b = refuelDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Handle submit
+                                if (RefuelDbHelper.getLastRefuel(getApplicationContext()).getOdometer() > Integer.valueOf(etOdometer.getText().toString())) {
+                                    Toast.makeText(MainActivity.this, "You can't have odometer reading less than last time!", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                RefuelDbHelper.addNewRefuelEntry(
+                                        getApplicationContext(),
+                                        Float.valueOf(etFuelAmt.getText().toString()),
+                                        Float.valueOf(etRate.getText().toString()),
+                                        Float.valueOf(etMoneyAmt.getText().toString()),
+                                        Integer.valueOf(etOdometer.getText().toString())
                                 );
+                                refuelDialog.dismiss();
+                                rfEntryCardAdapter.updateRefuelHistory(RefuelDbHelper.getRefuelHistory(getApplicationContext()));
 
-                        rfEntryCardAdapter.updateRefuelHistory(RefuelDbHelper.getRefuelHistory(getApplicationContext()));
-
+                            }
+                        });
                     }
                 });
-
-                AlertDialog refuelDialog = adBuilder.create();
                 refuelDialog.show();
             }
         });

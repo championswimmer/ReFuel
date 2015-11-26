@@ -91,4 +91,36 @@ public class RefuelDbHelper extends SQLiteOpenHelper{
 
         return refuelEntries;
     }
+
+    public static RefuelEntry getLastRefuel(Context ctx) {
+        SQLiteDatabase db = getInstance(ctx).getReadableDatabase();
+        String[] projection = {
+                RefuelDbContracts.RefuelEntry._ID,
+                RefuelDbContracts.RefuelEntry.COL_FUEL_FILLED,
+                RefuelDbContracts.RefuelEntry.COL_MONEY_PAID,
+                RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT,
+                RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING,
+                RefuelDbContracts.RefuelEntry.COL_TIMESTAMP,
+//                RefuelDbContracts.RefuelEntry.COL_DID_FULL_TANK,
+        };
+        Cursor c = db.query(
+                RefuelDbContracts.RefuelEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                RefuelDbContracts.RefuelEntry.COL_TIMESTAMP + " DESC",
+                "1"
+        );
+        c.moveToFirst();
+
+        return new RefuelEntry(
+                c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_FUEL_FILLED)),
+                c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_RATE_PER_LIT)),
+                c.getFloat(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_MONEY_PAID)),
+                c.getInt(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_ODOMETER_READING)),
+                c.getLong(c.getColumnIndexOrThrow(RefuelDbContracts.RefuelEntry.COL_TIMESTAMP))
+        );
+    }
 }

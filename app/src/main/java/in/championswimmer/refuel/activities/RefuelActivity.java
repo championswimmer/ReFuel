@@ -2,7 +2,7 @@ package in.championswimmer.refuel.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import in.championswimmer.refuel.R;
@@ -26,14 +25,14 @@ import in.championswimmer.refuel.dbhelper.RefuelDbHelper;
 import in.championswimmer.refuel.uihelper.ExtendedFuelEntryWatchers;
 import in.championswimmer.refuel.uihelper.RefuelEntryCardAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class RefuelActivity extends AppCompatActivity {
 
     RecyclerView rvHistoryContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_refuel);
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         rvHistoryContainer = (RecyclerView) findViewById(R.id.refuel_history_container);
@@ -42,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         rvHistoryContainer.setAdapter(rfEntryCardAdapter);
 
         setSupportActionBar(toolbar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 swEnterRate.setOnCheckedChangeListener(new ExtendedFuelEntryWatchers.RateEnterCheckedChanceListener(etRate, etFuelAmt));
 
                 //Set up the dialog using an AlertDialogBuilder
-                AlertDialog.Builder adBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_AlertDialog);
+                AlertDialog.Builder adBuilder = new AlertDialog.Builder(RefuelActivity.this, R.style.AppTheme_AlertDialog);
                 adBuilder.setView(dialogView)
                         .setNegativeButton("Cancel", null)
                         .setPositiveButton("Update", null);
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 // Handle submit
                                 if (RefuelDbHelper.getLastRefuel(getApplicationContext()).getOdometer() > Integer.valueOf(etOdometer.getText().toString())) {
-                                    Toast.makeText(MainActivity.this, "You can't have odometer reading less than last time!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RefuelActivity.this, "You can't have odometer reading less than last time!", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                                 RefuelDbHelper.addNewRefuelEntry(

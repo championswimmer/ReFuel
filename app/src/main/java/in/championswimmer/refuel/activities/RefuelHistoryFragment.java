@@ -2,7 +2,6 @@ package in.championswimmer.refuel.activities;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.github.clans.fab.FloatingActionButton;
 
 import in.championswimmer.refuel.R;
 import in.championswimmer.refuel.dbhelper.RefuelDbHelper;
@@ -50,8 +51,9 @@ public class RefuelHistoryFragment extends Fragment {
         final RefuelEntryCardAdapter rfEntryCardAdapter = new RefuelEntryCardAdapter(RefuelDbHelper.getRefuelHistory(getActivity().getApplicationContext()));
         rvHistoryContainer.setAdapter(rfEntryCardAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        fab.show();
+        FloatingActionButton fab = (FloatingActionButton) getActivity().getWindow().findViewById(R.id.fab_main);
+        fab.setImageResource(R.drawable.ic_add_medium);
+        fab.show(true);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

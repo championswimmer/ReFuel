@@ -5,9 +5,9 @@
     android:id="@+id/toolbar"
     android:layout_height="?attr/actionBarSize"
     android:layout_width="match_parent"
-    app:layout_collapseMode="pin"
+    app:layout_collapseMode="parallax"
     android:gravity="left"
-    app:logo="@drawable/ic_gas_station_white_small"
     app:popupTheme="@style/AppTheme.PopupOverlay">
+
 
 </android.support.v7.widget.Toolbar>

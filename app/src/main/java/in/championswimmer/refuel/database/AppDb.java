@@ -15,16 +15,16 @@ public class AppDb extends SQLiteOpenHelper {
 
     private static AppDb AppDbSingleton = null;
 
+    public AppDb(Context context) {
+        super(context, DB_NAME, null, DB_VER);
+    }
+
     public static AppDb getInstance(Context c) {
-        if (AppDbSingleton == null ) {
+        if (AppDbSingleton == null) {
             AppDbSingleton = new AppDb(c.getApplicationContext());
 
         }
         return AppDbSingleton;
-    }
-
-    public AppDb(Context context) {
-        super(context, DB_NAME, null, DB_VER);
     }
 
     @Override

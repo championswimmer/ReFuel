@@ -27,11 +27,11 @@ public class App extends Application {
             e.printStackTrace();
         }
 
-        r = new ReFuel(10, 10, 4.4);
+        r = new ReFuel(10, 10, 4.6);
         r.save(db);
 
         try {
-            ArrayList<ReFuel> rf = r.getAll(ReFuel.class, db);
+            ArrayList<ReFuel> rf = r.getAll(db);
             Log.d(TAG, "onCreate: get Array" + rf.size());
             for (ReFuel r2 : rf) {
                 Log.d(TAG, "onCreate: " + r2.getFuelFilled() + " " + r2.getOdoReading() + " " + r2.getRate());
@@ -40,9 +40,6 @@ public class App extends Application {
             Log.d(TAG, "onCreate: Exception");
             e.printStackTrace();
         }
-
-
-
 
     }
 }

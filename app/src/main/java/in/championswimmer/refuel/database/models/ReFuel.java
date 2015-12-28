@@ -1,28 +1,29 @@
 package in.championswimmer.refuel.database.models;
 
+import android.support.annotation.NonNull;
+
 import in.championswimmer.refuel.database.Model;
 
 /**
  * Created by championswimmer on 29/12/15.
  */
-public class ReFuel extends Model{
+public class ReFuel extends Model {
+
+    Integer odoReading;
+    Integer fuelFilled;
+    Double rate;
 
     public ReFuel() {
     }
 
-
-
-    Integer odoReading;
-    Integer fuelFilled;
-
-    public Integer getOdoReading() {
-        return odoReading;
-    }
-
-    public ReFuel(Integer odoReading, Integer fuelFilled, Double rate) {
+    public ReFuel(@NonNull Integer odoReading, @NonNull Integer fuelFilled, @NonNull Double rate) {
         this.odoReading = odoReading;
         this.fuelFilled = fuelFilled;
         this.rate = rate;
+    }
+
+    public Integer getOdoReading() {
+        return odoReading;
     }
 
     public void setOdoReading(Integer odoReading) {
@@ -44,8 +45,6 @@ public class ReFuel extends Model{
     public void setRate(Double rate) {
         this.rate = rate;
     }
-
-    Double rate;
 
 
 }

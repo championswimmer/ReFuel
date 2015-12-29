@@ -1,5 +1,6 @@
 package in.championswimmer.refuel;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import in.championswimmer.refuel.db.AppDb;
+import in.championswimmer.refuel.dbtables.Expense;
+import in.championswimmer.refuel.dbtables.Refuel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,23 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        SQLiteDatabase db = AppDb.getInstance(this).getWritableDatabase();
+        db.beginTransaction();
+        (new Expense(
+                "Some desc",
+                10.44,
+                123012894701L,
+                "refuel",
+                (int) (new Refuel(
+                        77.4,
+                        66.1,
+                        7885.7,
+                        false
+                )).save(db)
+        )).save(db);
+        db.setTransactionSuccessful();
+        db.endTransaction();
     }
 
     @Override

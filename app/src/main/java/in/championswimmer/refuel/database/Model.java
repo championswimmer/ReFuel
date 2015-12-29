@@ -34,7 +34,7 @@ public class Model {
             if (f.getName().contains("$")) continue;
             Class<?> clazz = f.getType();
             if (f.getName().equals("_id")) {
-                value = "INTEGER PRIMARY KEY AUTOINCREMENT";
+                value = "INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL";
             } else if (clazz == Integer.class || clazz == int.class) {
                 value = "INTEGER";
             } else if (clazz == Long.class || clazz == long.class) {
@@ -88,12 +88,14 @@ public class Model {
         return null;
     }
 
-    public void save(SQLiteDatabase db) {
+    public long save(SQLiteDatabase db) {
+        long retVal = -1;
         try {
-            db.insert(getTableName(), null, getContentValues());
+            retVal = db.insert(getTableName(), null, getContentValues());
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        return retVal;
     }
 
     public <T extends Model> ArrayList<T> getAll(SQLiteDatabase db)

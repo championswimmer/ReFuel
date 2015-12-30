@@ -87,4 +87,17 @@ public class Refuel {
     public void setExpense(Expense expense) {
         this.expense = expense;
     }
+
+    @Override
+    public String toString() {
+        return "Refuel{" +
+                "id=" + id +
+                ", odometer=" + odometer +
+                ", rate=" + rate +
+                ", litre=" + litre +
+                ", pumpName='" + pumpName + '\'' +
+                ", fullTank=" + fullTank +
+                ", expense=" + expense +
+                '}';
+    }
 }

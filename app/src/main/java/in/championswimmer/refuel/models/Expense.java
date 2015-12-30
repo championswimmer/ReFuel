@@ -65,4 +65,15 @@ public class Expense {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", timestamp=" + timestamp +
+                ", desc='" + desc + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

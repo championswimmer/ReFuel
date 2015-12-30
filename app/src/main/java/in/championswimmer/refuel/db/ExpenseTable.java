@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
+import java.util.ArrayList;
+
 import in.championswimmer.refuel.models.Expense;
 
 /**
@@ -22,7 +24,7 @@ public class ExpenseTable{
 
     public static final String[] PROJECTION = {ID, AMOUNT, TIMESTAMP, DESC, TYPE};
 
-    public static final String TABLE_CREATE_COMMAND =
+    public static final String CMD_CREATE_TABLE =
             " CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( "
             + ID + " INTEGER PRIMARY KEY , "
             + AMOUNT + " INTEGER , "
@@ -31,6 +33,30 @@ public class ExpenseTable{
             + TYPE + " TEXT CHECK ( TYPE in ('refuel', 'service', 'misc') ) "
             + " );";
 
+    public static ArrayList<Expense> getByArg (SQLiteDatabase db, String whereClause, String sortBy) {
+        ArrayList<Expense> expenses = new ArrayList<>();
+        Cursor c = db.query(
+                TABLE_NAME,
+                PROJECTION,
+                whereClause,
+                null,
+                null,
+                null,
+                (sortBy != null) ? sortBy : ID + " DESC"
+        );
+        c.moveToFirst();
+        while (! c.isAfterLast()) {
+            expenses.add(new Expense(
+                    c.getInt(c.getColumnIndexOrThrow(ID)),
+                    c.getDouble(c.getColumnIndexOrThrow(AMOUNT)),
+                    c.getLong(c.getColumnIndexOrThrow(TIMESTAMP)),
+                    c.getString(c.getColumnIndexOrThrow(DESC)),
+                    c.getString(c.getColumnIndexOrThrow(TYPE))
+            ));
+        }
+        c.close();
+        return expenses;
+    }
     public static Expense getById (SQLiteDatabase db, long id) {
         Cursor c = db.query(
                 TABLE_NAME,
@@ -51,6 +77,19 @@ public class ExpenseTable{
         );
         c.close();
         return exp;
+    }
+
+    public static int deleteById (SQLiteDatabase db, Expense exp) {
+        try {
+            return db.delete(
+                    TABLE_NAME,
+                    ID + "=" + exp.getId(),
+                    null
+            );
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public static int update (SQLiteDatabase db, Expense exp) {

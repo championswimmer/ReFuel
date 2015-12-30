@@ -1,4 +1,4 @@
-package in.championswimmer.refuel;
+package in.championswimmer.refuel.db;
 
 import android.app.Activity;
 import android.app.RobolectricActivityManager;
@@ -16,6 +16,7 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.*;
 
+import in.championswimmer.refuel.BuildConfig;
 import in.championswimmer.refuel.db.AppDb;
 import in.championswimmer.refuel.db.ExpenseTable;
 import in.championswimmer.refuel.db.RefuelTable;
@@ -24,7 +25,7 @@ import in.championswimmer.refuel.db.RefuelTable;
  * Created by championswimmer on 30/12/15.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21, manifest = Config.NONE)
+@Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
 public class AppDbTest {
 
     private Activity mActivity;
@@ -32,6 +33,7 @@ public class AppDbTest {
     @Before
     public void setUp() throws Exception {
         Activity activity = Robolectric.setupActivity(Activity.class);
+        activity.deleteDatabase(AppDb.DB_NAME);
         db = AppDb.getInstance(activity).getWritableDatabase();
     }
 

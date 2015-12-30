@@ -15,13 +15,8 @@ public class AppDb extends SQLiteOpenHelper {
 
     public static final String CMD_ENABLE_FOREIGN_KEYS = "PRAGMA foreign_keys = ON;";
 
-    private static AppDb appDb = null;
-
     public static AppDb getInstance (Context c) {
-        if (appDb == null) {
-            appDb = new AppDb(c);
-        }
-        return appDb;
+        return new AppDb(c);
     }
 
     public AppDb (Context c) {

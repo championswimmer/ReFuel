@@ -4,6 +4,8 @@ env:
   global:
     - ANDROID_TARGET=android-21
     - ANDROID_ABI=armeabi-v7a
+before_install:
+  - pip install codecov
 android:
   components:
   - tools
@@ -20,5 +22,4 @@ script:
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
   - ./gradlew connectedCheck
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
+  - codecov

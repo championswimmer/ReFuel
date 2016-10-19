@@ -11,6 +11,9 @@ public class Expense {
     String desc;
     String type;
 
+    public Expense() {
+    }
+
     public Expense(int id, double amount, long timestamp, String desc, String type) {
         this.id = id;
         this.amount = amount;

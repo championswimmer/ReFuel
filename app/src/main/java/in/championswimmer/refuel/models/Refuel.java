@@ -13,6 +13,9 @@ public class Refuel {
     boolean fullTank;
     Expense expense;
 
+    public Refuel() {
+    }
+
     public Refuel(int id, double odometer, double rate, double litre, String pumpName, boolean fullTank, Expense expense) {
         this.id = id;
         this.odometer = odometer;
